@@ -3,62 +3,81 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gaurav's Live Stock Tracker</title>
+  <title>Gaurav's Pro Stock Tracker</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+      font-family: 'Poppins', sans-serif;
       color: #ffffff;
+      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+      background-image: url('https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif');
+      background-repeat: no-repeat;
       background-attachment: fixed;
-      animation: pulseBg 10s infinite alternate;
+      background-size: cover;
+      animation: flicker 3s infinite alternate;
     }
 
-    @keyframes pulseBg {
+    @keyframes flicker {
       0% { filter: brightness(1); }
-      100% { filter: brightness(1.2); }
+      100% { filter: brightness(1.1); }
     }
 
     h1 {
       text-align: center;
-      font-size: 2rem;
-      color: #00f7ff;
-      margin-top: 20px;
-      text-shadow: 0 0 10px #00f7ff;
+      font-size: 2.5rem;
+      margin-top: 30px;
+      color: #00ffcc;
+      text-shadow: 0 0 10px #00ffcc;
+      animation: glowText 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowText {
+      from { text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ffcc, 0 0 30px #00ffcc; }
     }
 
     .dashboard {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 10px;
-      padding: 20px;
+      gap: 20px;
+      padding: 30px;
     }
 
     .stock-card {
-      background-color: #121212;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #00ffe1;
-      padding: 15px;
-      width: 220px;
+      background: rgba(0, 0, 0, 0.75);
+      border: 1px solid #00ffc8;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #00ffe1;
+      padding: 20px;
+      width: 260px;
       text-align: center;
+      backdrop-filter: blur(6px);
     }
 
     .stock-card h2 {
-      font-size: 1.1rem;
-      margin: 5px 0;
-      color: #00ffe1;
+      font-size: 1.3rem;
+      margin: 10px 0;
+      color: #00ffc8;
     }
 
     .live-price {
-      color: #ffd700;
-      font-size: 1rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #ffea00;
       margin-bottom: 10px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.9; }
     }
 
     .groww-link a {
       color: #1ecbe1;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       text-decoration: none;
     }
 
@@ -68,14 +87,13 @@
   </style>
 </head>
 <body>
-  <h1>Gaurav's Live Stock Tracker</h1>
+  <h1>Gaurav's Live Stock Tracker 💰</h1>
   <div class="dashboard">
-
     <div class="stock-card">
       <h2>NIFTY Index</h2>
       <div class="live-price" id="price-nifty">Live Price: Loading...</div>
       <div class="groww-link">
-        <a href="https://groww.in/indices/nifty-50" target="_blank">View Chart on Groww</a>
+        <a href="https://groww.in/indices/nifty-50" target="_blank">📈 View on Groww</a>
       </div>
     </div>
 
@@ -83,7 +101,7 @@
       <h2>BankNIFTY Index</h2>
       <div class="live-price" id="price-banknifty">Live Price: Loading...</div>
       <div class="groww-link">
-        <a href="https://groww.in/indices/bank-nifty" target="_blank">View Chart on Groww</a>
+        <a href="https://groww.in/indices/bank-nifty" target="_blank">📈 View on Groww</a>
       </div>
     </div>
 
@@ -91,7 +109,7 @@
       <h2>Reliance Power</h2>
       <div class="live-price" id="price-relpow">Live Price: Loading...</div>
       <div class="groww-link">
-        <a href="https://groww.in/stocks/reliance-power-ltd" target="_blank">View Chart on Groww</a>
+        <a href="https://groww.in/stocks/reliance-power-ltd" target="_blank">📈 View on Groww</a>
       </div>
     </div>
 
@@ -99,10 +117,9 @@
       <h2>NTPC Green Energy</h2>
       <div class="live-price" id="price-ntpc">Live Price: Loading...</div>
       <div class="groww-link">
-        <a href="https://groww.in/stocks/ntpc-ltd" target="_blank">View Chart on Groww</a>
+        <a href="https://groww.in/stocks/ntpc-ltd" target="_blank">📈 View on Groww</a>
       </div>
     </div>
-
   </div>
 
   <script>
@@ -119,12 +136,12 @@
         const res = await fetch(`https://api.twelvedata.com/price?symbol=${symbol}&apikey=${API_KEY}`);
         const data = await res.json();
         if (data.price) {
-          document.getElementById(elementId).innerText = `Live Price: ₹${parseFloat(data.price).toFixed(2)}`;
+          document.getElementById(elementId).innerText = `₹${parseFloat(data.price).toFixed(2)}`;
         } else {
-          document.getElementById(elementId).innerText = 'Live Price: Unavailable';
+          document.getElementById(elementId).innerText = 'Price: Unavailable';
         }
       } catch (err) {
-        document.getElementById(elementId).innerText = 'Live Price: Unavailable';
+        document.getElementById(elementId).innerText = 'Price: Unavailable';
       }
     }
 
@@ -135,3 +152,4 @@
   </script>
 </body>
 </html>
+
