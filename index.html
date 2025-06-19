@@ -2,14 +2,174 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Live Website</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📈 Indian Stock Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .widget-container {
+      max-width: 750px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Welcome to My Website</h1>
-    <p>This site is now live with the help of ChatGPT 🚀</p>
+
+  <h1>📊 Indian Stock Market Live</h1>
+
+  <!-- Reliance Power -->
+  <div class="widget-container">
+    <h2>Reliance Power</h2>
+    <div class="tradingview-widget-container">
+      <div id="tradingview_1"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+      {
+        "symbol": "BSE:RELIANCEP",
+        "width": "100%",
+        "height": "200",
+        "locale": "en",
+        "colorTheme": "light",
+        "dateRange": "1D",
+        "isTransparent": false
+      }
+      </script>
+    </div>
   </div>
+
+  <!-- NTPC (Fallback for NTPC Green) -->
+  <div class="widget-container">
+    <h2>NTPC</h2>
+    <div class="tradingview-widget-container">
+      <div id="tradingview_2"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+      {
+        "symbol": "NSE:NTPC",
+        "width": "100%",
+        "height": "200",
+        "locale": "en",
+        "colorTheme": "light",
+        "dateRange": "1D",
+        "isTransparent": false
+      }
+      </script>
+    </div>
+  </div>
+
+  <!-- IOCL -->
+  <div class="widget-container">
+    <h2>Indian Oil Corporation (IOCL)</h2>
+    <div class="tradingview-widget-container">
+      <div id="tradingview_3"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+      {
+        "symbol": "NSE:IOC",
+        "width": "100%",
+        "height": "200",
+        "locale": "en",
+        "colorTheme": "light",
+        "dateRange": "1D",
+        "isTransparent": false
+      }
+      </script>
+    </div>
+  </div>
+
+  <!-- NBCC -->
+  <div class="widget-container">
+    <h2>NBCC</h2>
+    <div class="tradingview-widget-container">
+      <div id="tradingview_4"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+      {
+        "symbol": "NSE:NBCC",
+        "width": "100%",
+        "height": "200",
+        "locale": "en",
+        "colorTheme": "light",
+        "dateRange": "1D",
+        "isTransparent": false
+      }
+      </script>
+    </div>
+  </div>
+
+  <!-- Vodafone Idea -->
+  <div class="widget-container">
+    <h2>Vodafone Idea (VI)</h2>
+    <div class="tradingview-widget-container">
+      <div id="tradingview_5"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+      {
+        "symbol": "NSE:IDEA",
+        "width": "100%",
+        "height": "200",
+        "locale": "en",
+        "colorTheme": "light",
+        "dateRange": "1D",
+        "isTransparent": false
+      }
+      </script>
+    </div>
+  </div>
+
+  <!-- Nippon India Nasdaq 100 ETF (Fallback with N100 index) -->
+  <div class="widget-container">
+    <h2>Nippon Nasdaq 100 ETF</h2>
+    <div class="tradingview-widget-container">
+      <div id="tradingview_6"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+      {
+        "symbol": "NASDAQ:NDX",
+        "width": "100%",
+        "height": "200",
+        "locale": "en",
+        "colorTheme": "light",
+        "dateRange": "1D",
+        "isTransparent": false
+      }
+      </script>
+    </div>
+  </div>
+
+  <!-- Tata Gold (represented with Gold ETF) -->
+  <div class="widget-container">
+    <h2>Tata Gold ETF</h2>
+    <div class="tradingview-widget-container">
+      <div id="tradingview_7"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+      {
+        "symbol": "MCX:GOLD1!",
+        "width": "100%",
+        "height": "200",
+        "locale": "en",
+        "colorTheme": "light",
+        "dateRange": "1D",
+        "isTransparent": false
+      }
+      </script>
+    </div>
+  </div>
+
+  <!-- Market News Section -->
+  <div class="widget-container">
+    <h2>📰 Latest Market News (NSE)</h2>
+    <iframe src="https://www.moneycontrol.com/news/business/markets/" width="100%" height="600" style="border:none;"></iframe>
+  </div>
+
 </body>
 </html>
+
