@@ -1,157 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gaurav's Pro Stock Tracker</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gaurav's Live Stock Dashboard</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      color: #ffffff;
-      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
-      background-image: url('https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif');
-      background-repeat: no-repeat;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('https://wallpapercave.com/wp/wp9155553.jpg') fixed center center / cover no-repeat;
       background-attachment: fixed;
-      background-size: cover;
-      animation: flicker 3s infinite alternate;
-    }
-
-    @keyframes flicker {
-      0% { filter: brightness(1); }
-      100% { filter: brightness(1.1); }
+      overflow-x: hidden;
     }
 
     h1 {
       text-align: center;
-      font-size: 2.5rem;
-      margin-top: 30px;
-      color: #00ffcc;
-      text-shadow: 0 0 10px #00ffcc;
-      animation: glowText 2s ease-in-out infinite alternate;
+      font-size: 3rem;
+      padding: 2rem;
+      color: #00ffea;
+      text-shadow: 2px 2px 10px #00ffea;
     }
 
-    @keyframes glowText {
-      from { text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc; }
-      to { text-shadow: 0 0 20px #00ffcc, 0 0 30px #00ffcc; }
-    }
-
-    .dashboard {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 30px;
+    .stock-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
     }
 
     .stock-card {
-      background: rgba(0, 0, 0, 0.75);
-      border: 1px solid #00ffc8;
-      border-radius: 15px;
-      box-shadow: 0 0 20px #00ffe1;
-      padding: 20px;
-      width: 260px;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+      padding: 1.5rem;
       text-align: center;
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(10px);
+      transition: transform 0.4s ease-in-out;
     }
 
-    .stock-card h2 {
-      font-size: 1.3rem;
-      margin: 10px 0;
-      color: #00ffc8;
+    .stock-card:hover {
+      transform: scale(1.02);
     }
 
-    .live-price {
-      font-size: 1.1rem;
+    .title {
+      font-size: 1.6rem;
       font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #00ff00;
+    }
+
+    .price {
+      font-size: 1.3rem;
       color: #ffea00;
-      margin-bottom: 10px;
-      animation: pulse 1.5s infinite;
+      margin-bottom: 1rem;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.9; }
-      50% { transform: scale(1.05); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.9; }
+    iframe {
+      border: none;
+      width: 100%;
+      height: 280px;
+      border-radius: 12px;
+      margin-bottom: 1rem;
     }
 
-    .groww-link a {
-      color: #1ecbe1;
-      font-size: 0.95rem;
+    .groww-link {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 8px 14px;
+      background: #00ff00;
+      color: #000;
+      font-weight: bold;
+      border-radius: 10px;
       text-decoration: none;
+      transition: background 0.3s;
     }
 
-    .groww-link a:hover {
-      text-decoration: underline;
+    .groww-link:hover {
+      background: #bbff00;
+    }
+
+    .curtain {
+      animation: fadeInUp 2s ease-in-out;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <h1>Gaurav's Live Stock Tracker 💰</h1>
-  <div class="dashboard">
-    <div class="stock-card">
-      <h2>NIFTY Index</h2>
-      <div class="live-price" id="price-nifty">Live Price: Loading...</div>
-      <div class="groww-link">
-        <a href="https://groww.in/indices/nifty-50" target="_blank">📈 View on Groww</a>
-      </div>
+  <h1>Gaurav's Live Stock Dashboard</h1>
+
+  <div class="stock-section">
+    <div class="stock-card curtain">
+      <div class="title">NIFTY Index</div>
+      <div class="price" id="NIFTY-price">Live Price: Loading...</div>
+      <iframe src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?symbol=NSE:NIFTY" allowtransparency="true"></iframe>
+      <a class="groww-link" href="https://groww.in/indices/nifty-50" target="_blank">Open in Groww</a>
     </div>
 
-    <div class="stock-card">
-      <h2>BankNIFTY Index</h2>
-      <div class="live-price" id="price-banknifty">Live Price: Loading...</div>
-      <div class="groww-link">
-        <a href="https://groww.in/indices/bank-nifty" target="_blank">📈 View on Groww</a>
-      </div>
+    <div class="stock-card curtain">
+      <div class="title">BankNIFTY Index</div>
+      <div class="price" id="BANKNIFTY-price">Live Price: Loading...</div>
+      <iframe src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?symbol=NSE:BANKNIFTY" allowtransparency="true"></iframe>
+      <a class="groww-link" href="https://groww.in/indices/nifty-bank" target="_blank">Open in Groww</a>
     </div>
 
-    <div class="stock-card">
-      <h2>Reliance Power</h2>
-      <div class="live-price" id="price-relpow">Live Price: Loading...</div>
-      <div class="groww-link">
-        <a href="https://groww.in/stocks/reliance-power-ltd" target="_blank">📈 View on Groww</a>
-      </div>
-    </div>
-
-    <div class="stock-card">
-      <h2>NTPC Green Energy</h2>
-      <div class="live-price" id="price-ntpc">Live Price: Loading...</div>
-      <div class="groww-link">
-        <a href="https://groww.in/stocks/ntpc-ltd" target="_blank">📈 View on Groww</a>
-      </div>
+    <div class="stock-card curtain">
+      <div class="title">NTPC Green Energy</div>
+      <div class="price" id="NTPC-price">Live Price: Loading...</div>
+      <iframe src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?symbol=BSE:533015" allowtransparency="true"></iframe>
+      <a class="groww-link" href="https://groww.in/stocks/ntpc-ltd" target="_blank">Open in Groww</a>
     </div>
   </div>
 
   <script>
-    const API_KEY = '3e440100d3154a03b8169bdcc880b375';
-    const stockSymbols = {
-      nifty: 'NSE:NIFTY',
-      banknifty: 'NSE:BANKNIFTY',
-      relpow: 'NSE:RPOWER',
-      ntpc: 'NSE:NTPC'
-    };
-
-    async function fetchPrice(symbol, elementId) {
+    async function fetchLivePrice(symbol, elementId) {
       try {
-        const proxy = "https://corsproxy.io/?";
-      const url = `${proxy}https://api.twelvedata.com/price?symbol=${symbol}&apikey=${API_KEY}`;
-      const res = await fetch(url);
-        const data = await res.json();
-        if (data.price) {
-          document.getElementById(elementId).innerText = `₹${parseFloat(data.price).toFixed(2)}`;
-        } else {
-          document.getElementById(elementId).innerText = 'Price: Unavailable';
-        }
-      } catch (err) {
-        document.getElementById(elementId).innerText = 'Price: Unavailable';
+        const response = await fetch("/.netlify/functions/price?symbol=" + symbol);
+        const data = await response.json();
+        document.getElementById(elementId).textContent = `Live Price: ₹${data.price}`;
+      } catch (e) {
+        document.getElementById(elementId).textContent = "Live Price: Unavailable";
       }
     }
 
-    fetchPrice(stockSymbols.nifty, 'price-nifty');
-    fetchPrice(stockSymbols.banknifty, 'price-banknifty');
-    fetchPrice(stockSymbols.relpow, 'price-relpow');
-    fetchPrice(stockSymbols.ntpc, 'price-ntpc');
+    fetchLivePrice("NSE:NIFTY", "NIFTY-price");
+    fetchLivePrice("NSE:BANKNIFTY", "BANKNIFTY-price");
+    fetchLivePrice("BSE:533015", "NTPC-price");
   </script>
 </body>
 </html>
+
 
