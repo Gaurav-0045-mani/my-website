@@ -5,182 +5,164 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gaurav's Stock Dashboard</title>
   <style>
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      height: 100%;
-      background: #000;
+      background: linear-gradient(135deg, #000000, #0f0f0f);
       color: #fff;
-      overflow: hidden;
+      overflow-x: hidden;
+      background-image: url('https://www.transparenttextures.com/patterns/black-paper.png');
     }
-    #bg {
+    .wallpaper {
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background: url('https://i.gifer.com/7plF.gif') center center / cover no-repeat;
+      opacity: 0.2;
+      filter: blur(2px);
     }
-    .overlay {
-      position: relative;
-      z-index: 1;
+    h1 {
+      text-align: center;
+      color: #00ffcc;
+      font-size: 3rem;
+      margin: 1rem 0;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+      }
+      to {
+        text-shadow: 0 0 20px #00ffcc, 0 0 30px #00ffcc;
+      }
+    }
+    .stock-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 20px;
       padding: 20px;
-      box-sizing: border-box;
     }
-    .stock {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 15px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0, 255, 150, 0.4);
+    .stock-card {
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 255, 150, 0.6);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      backdrop-filter: blur(5px);
     }
-    h2 {
-      margin-top: 0;
-      font-size: 1.2rem;
-      color: #00ffc8;
+    .stock-card h2 {
+      margin: 0;
+      color: #00ffcc;
+      font-size: 1.3rem;
     }
     .price {
-      font-size: 1.1rem;
+      color: #ffff00;
       font-weight: bold;
-      color: #0ff;
     }
-    iframe {
-      width: 100%;
-      height: 200px;
-      border-radius: 10px;
-      margin-top: 10px;
-    }
-    .pros-cons {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .pros, .cons {
-      flex: 1;
-      font-size: 0.8rem;
-      background-color: #111;
+    .news, .proscons {
+      background: #121212;
       padding: 10px;
       border-radius: 10px;
     }
-    .news {
-      margin-top: 10px;
-      background-color: #111;
-      padding: 10px;
-      border-radius: 10px;
-      font-size: 0.85rem;
+    .news ul, .proscons ul {
+      padding-left: 20px;
     }
-    a {
-      color: #0ff;
-      text-decoration: none;
-      font-size: 0.9rem;
+    .tradingview-widget-container {
+      border-radius: 10px;
+      overflow: hidden;
     }
   </style>
 </head>
 <body>
-  <div id="bg"></div>
-  <div class="overlay">
+  <div class="wallpaper"></div>
+  <h1>Gaurav's Live Stock Dashboard</h1>
+  <div class="stock-grid">
 
-    <div class="stock">
+    <!-- Stock Block -->
+    <div class="stock-card">
       <h2>NIFTY Index</h2>
-      <p>Live Price: <span class="price" id="price-nifty">Loading...</span></p>
-      <iframe src="https://s.tradingview.com/widgetembed/?symbol=NSE%3ANIFTY&interval=D&theme=dark"></iframe>
-      <div class="news" id="news-nifty">
+      <div class="price" id="price-nifty">Live Price: Loading...</div>
+      <div class="tradingview-widget-container">
+        <iframe src="https://www.groww.in/markets/top-indices/nifty-50" width="100%" height="200"></iframe>
+      </div>
+      <div class="news">
         <strong>Latest News:</strong>
         <ul>
           <li>Market opens higher as Nifty gains 100 pts.</li>
           <li>Top 10 gainers led by Infosys and HDFC Bank.</li>
         </ul>
       </div>
-      <div class="pros-cons">
-        <div class="pros"><strong>Pros:</strong><ul><li>Strong index</li><li>Tracks top 50 companies</li></ul></div>
-        <div class="cons"><strong>Cons:</strong><ul><li>Subject to market volatility</li></ul></div>
+      <div class="proscons">
+        <strong>Pros:</strong>
+        <ul><li>Strong index</li><li>Tracks top 50 companies</li></ul>
+        <strong>Cons:</strong>
+        <ul><li>Subject to market volatility</li></ul>
       </div>
     </div>
 
-    <div class="stock">
+    <!-- Repeat for BankNIFTY and NTPC Green Energy -->
+    <div class="stock-card">
       <h2>BankNIFTY Index</h2>
-      <p>Live Price: <span class="price" id="price-banknifty">Loading...</span></p>
-      <iframe src="https://s.tradingview.com/widgetembed/?symbol=NSE%3ABANKNIFTY&interval=D&theme=dark"></iframe>
-      <div class="news" id="news-banknifty">
+      <div class="price" id="price-banknifty">Live Price: Loading...</div>
+      <div class="tradingview-widget-container">
+        <iframe src="https://www.groww.in/markets/top-indices/bank-nifty" width="100%" height="200"></iframe>
+      </div>
+      <div class="news">
         <strong>Latest News:</strong>
         <ul>
           <li>BankNifty surges on strong PSU bank results.</li>
           <li>ICICI and SBI drive index gains.</li>
         </ul>
       </div>
-      <div class="pros-cons">
-        <div class="pros"><strong>Pros:</strong><ul><li>High liquidity</li><li>Strong banking sector</li></ul></div>
-        <div class="cons"><strong>Cons:</strong><ul><li>Highly volatile</li></ul></div>
+      <div class="proscons">
+        <strong>Pros:</strong>
+        <ul><li>High liquidity</li><li>Strong banking sector</li></ul>
+        <strong>Cons:</strong>
+        <ul><li>Highly volatile</li></ul>
       </div>
     </div>
 
-    <div class="stock">
+    <div class="stock-card">
       <h2>NTPC Green Energy</h2>
-      <p>Live Price: <span class="price" id="price-ntpc">Loading...</span></p>
-      <iframe src="https://s.tradingview.com/widgetembed/?symbol=BSE%3ANTPC&interval=D&theme=dark"></iframe>
-      <div class="news" id="news-ntpc">
+      <div class="price" id="price-ntpc">Live Price: Loading...</div>
+      <div class="tradingview-widget-container">
+        <iframe src="https://www.groww.in/stocks/ntpc-ltd" width="100%" height="200"></iframe>
+      </div>
+      <div class="news">
         <strong>Latest News:</strong>
         <ul>
           <li>NTPC Green signs MOU for 500 MW solar project.</li>
           <li>Government boosts renewable energy targets.</li>
         </ul>
       </div>
-      <div class="pros-cons">
-        <div class="pros"><strong>Pros:</strong><ul><li>Green focus</li><li>Govt support</li></ul></div>
-        <div class="cons"><strong>Cons:</strong><ul><li>Execution risks</li></ul></div>
+      <div class="proscons">
+        <strong>Pros:</strong>
+        <ul><li>Green focus</li><li>Govt support</li></ul>
+        <strong>Cons:</strong>
+        <ul><li>Execution risks</li></ul>
       </div>
     </div>
-
   </div>
 
-  <!-- Animated Background -->
-  <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.waves.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
   <script>
-    VANTA.WAVES({
-      el: "#bg",
-      mouseControls: true,
-      touchControls: true,
-      minHeight: 200.00,
-      minWidth: 200.00,
-      scale: 1.00,
-      scaleMobile: 1.00,
-      color: 0x00ffc8,
-      shininess: 50.00,
-      waveHeight: 20.00,
-      waveSpeed: 1.5,
-      zoom: 1
-    });
-  </script>
-
-  <!-- Live Stock Price Script -->
-  <script>
-    const stocks = [
-      { symbol: "NSE:NIFTY", id: "price-nifty" },
-      { symbol: "NSE:BANKNIFTY", id: "price-banknifty" },
-      { symbol: "NTPC.BSE", id: "price-ntpc" }
-    ];
-
-    const apiKey = "3e440100d3154a03b8169bdcc880b375";
-
-    async function fetchPrices() {
-      for (const stock of stocks) {
-        try {
-          const response = await fetch(`https://api.twelvedata.com/price?symbol=${stock.symbol}&apikey=${apiKey}`);
-          const data = await response.json();
-          document.getElementById(stock.id).textContent = data.price ? `₹${parseFloat(data.price).toFixed(2)}` : "Unavailable";
-        } catch {
-          document.getElementById(stock.id).textContent = "Error";
-        }
+    async function fetchYahooPrice(ticker, elementId) {
+      try {
+        const res = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1m`);
+        const data = await res.json();
+        const price = data.chart.result[0].meta.regularMarketPrice;
+        document.getElementById(elementId).textContent = `Live Price: ₹${price.toFixed(2)}`;
+      } catch (error) {
+        document.getElementById(elementId).textContent = 'Live Price: Unavailable';
       }
     }
-
-    fetchPrices();
-    setInterval(fetchPrices, 30000);
+    fetchYahooPrice("^NSEI", "price-nifty");
+    fetchYahooPrice("^NSEBANK", "price-banknifty");
+    fetchYahooPrice("NTPC.NS", "price-ntpc");
   </script>
 </body>
 </html>
