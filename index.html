@@ -3,172 +3,114 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gaurav's Live Stock Dashboard</title>
+  <title>Gaurav's Live Stock Tracker</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: url('https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
+      background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+      color: #ffffff;
+      background-attachment: fixed;
+      animation: pulseBg 10s infinite alternate;
     }
+
+    @keyframes pulseBg {
+      0% { filter: brightness(1); }
+      100% { filter: brightness(1.2); }
+    }
+
     h1 {
       text-align: center;
-      font-size: 2.5rem;
+      font-size: 2rem;
       color: #00f7ff;
       margin-top: 20px;
-      text-shadow: 0 0 15px #00f7ff;
+      text-shadow: 0 0 10px #00f7ff;
     }
+
     .dashboard {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
+      gap: 10px;
       padding: 20px;
     }
+
     .stock-card {
-      background-color: rgba(0, 0, 0, 0.7);
-      border-radius: 15px;
-      box-shadow: 0 0 15px #00ffcc;
+      background-color: #121212;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00ffe1;
       padding: 15px;
-      width: 300px;
-      min-height: 600px;
+      width: 220px;
+      text-align: center;
     }
+
     .stock-card h2 {
-      color: #00ffcc;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
+      margin: 5px 0;
+      color: #00ffe1;
     }
+
     .live-price {
-      color: yellow;
+      color: #ffd700;
+      font-size: 1rem;
       margin-bottom: 10px;
     }
-    .section {
-      background-color: #111;
-      padding: 10px;
-      border-radius: 10px;
-      margin: 10px 0;
+
+    .groww-link a {
+      color: #1ecbe1;
+      font-size: 0.9rem;
+      text-decoration: none;
     }
-    .section h4 {
-      margin-bottom: 5px;
-    }
-    .section ul {
-      padding-left: 18px;
-    }
-    iframe {
-      border-radius: 10px;
+
+    .groww-link a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <h1>Gaurav's Live Stock Dashboard</h1>
+  <h1>Gaurav's Live Stock Tracker</h1>
   <div class="dashboard">
+
     <div class="stock-card">
       <h2>NIFTY Index</h2>
       <div class="live-price" id="price-nifty">Live Price: Loading...</div>
-      <div class="tradingview-widget-container">
-        <div id="tradingview_nifty"></div>
-      </div>
-      <div class="section">
-        <h4>Latest News:</h4>
-        <ul>
-          <li>Market opens higher as Nifty gains 100 pts.</li>
-          <li>Top 10 gainers led by Infosys and HDFC Bank.</li>
-        </ul>
-      </div>
-      <div class="section">
-        <h4>Pros:</h4>
-        <ul><li>Strong index</li><li>Tracks top 50 companies</li></ul>
-        <h4>Cons:</h4>
-        <ul><li>Subject to market volatility</li></ul>
+      <div class="groww-link">
+        <a href="https://groww.in/indices/nifty-50" target="_blank">View Chart on Groww</a>
       </div>
     </div>
 
     <div class="stock-card">
       <h2>BankNIFTY Index</h2>
       <div class="live-price" id="price-banknifty">Live Price: Loading...</div>
-      <div class="tradingview-widget-container">
-        <div id="tradingview_banknifty"></div>
+      <div class="groww-link">
+        <a href="https://groww.in/indices/bank-nifty" target="_blank">View Chart on Groww</a>
       </div>
-      <div class="section">
-        <h4>Latest News:</h4>
-        <ul>
-          <li>BankNifty surges on strong PSU bank results.</li>
-          <li>ICICI and SBI drive index gains.</li>
-        </ul>
-      </div>
-      <div class="section">
-        <h4>Pros:</h4>
-        <ul><li>High liquidity</li><li>Strong banking sector</li></ul>
-        <h4>Cons:</h4>
-        <ul><li>Highly volatile</li></ul>
+    </div>
+
+    <div class="stock-card">
+      <h2>Reliance Power</h2>
+      <div class="live-price" id="price-relpow">Live Price: Loading...</div>
+      <div class="groww-link">
+        <a href="https://groww.in/stocks/reliance-power-ltd" target="_blank">View Chart on Groww</a>
       </div>
     </div>
 
     <div class="stock-card">
       <h2>NTPC Green Energy</h2>
       <div class="live-price" id="price-ntpc">Live Price: Loading...</div>
-      <div class="tradingview-widget-container">
-        <div id="tradingview_ntpc"></div>
-      </div>
-      <div class="section">
-        <h4>Latest News:</h4>
-        <ul>
-          <li>NTPC Green signs MOU for 500 MW solar project.</li>
-          <li>Government boosts renewable energy targets.</li>
-        </ul>
-      </div>
-      <div class="section">
-        <h4>Pros:</h4>
-        <ul><li>Green focus</li><li>Govt support</li></ul>
-        <h4>Cons:</h4>
-        <ul><li>Execution risks</li></ul>
+      <div class="groww-link">
+        <a href="https://groww.in/stocks/ntpc-ltd" target="_blank">View Chart on Groww</a>
       </div>
     </div>
+
   </div>
 
-  <!-- TradingView Script -->
-  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-  <script>
-    new TradingView.widget({
-      "width": "100%",
-      "height": 300,
-      "symbol": "NSE:NIFTY",
-      "interval": "D",
-      "theme": "dark",
-      "style": "1",
-      "locale": "en",
-      "container_id": "tradingview_nifty"
-    });
-
-    new TradingView.widget({
-      "width": "100%",
-      "height": 300,
-      "symbol": "NSE:BANKNIFTY",
-      "interval": "D",
-      "theme": "dark",
-      "style": "1",
-      "locale": "en",
-      "container_id": "tradingview_banknifty"
-    });
-
-    new TradingView.widget({
-      "width": "100%",
-      "height": 300,
-      "symbol": "NSE:NTPC",
-      "interval": "D",
-      "theme": "dark",
-      "style": "1",
-      "locale": "en",
-      "container_id": "tradingview_ntpc"
-    });
-  </script>
-
-  <!-- Live Price Script -->
   <script>
     const API_KEY = '3e440100d3154a03b8169bdcc880b375';
-    const symbols = {
+    const stockSymbols = {
       nifty: 'NSE:NIFTY',
       banknifty: 'NSE:BANKNIFTY',
+      relpow: 'NSE:RPOWER',
       ntpc: 'NSE:NTPC'
     };
 
@@ -177,7 +119,7 @@
         const res = await fetch(`https://api.twelvedata.com/price?symbol=${symbol}&apikey=${API_KEY}`);
         const data = await res.json();
         if (data.price) {
-          document.getElementById(elementId).innerText = `Live Price: ₹${data.price}`;
+          document.getElementById(elementId).innerText = `Live Price: ₹${parseFloat(data.price).toFixed(2)}`;
         } else {
           document.getElementById(elementId).innerText = 'Live Price: Unavailable';
         }
@@ -186,9 +128,10 @@
       }
     }
 
-    fetchPrice(symbols.nifty, 'price-nifty');
-    fetchPrice(symbols.banknifty, 'price-banknifty');
-    fetchPrice(symbols.ntpc, 'price-ntpc');
+    fetchPrice(stockSymbols.nifty, 'price-nifty');
+    fetchPrice(stockSymbols.banknifty, 'price-banknifty');
+    fetchPrice(stockSymbols.relpow, 'price-relpow');
+    fetchPrice(stockSymbols.ntpc, 'price-ntpc');
   </script>
 </body>
 </html>
